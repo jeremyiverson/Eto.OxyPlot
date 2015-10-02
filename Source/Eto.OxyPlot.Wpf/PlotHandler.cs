@@ -15,8 +15,22 @@ namespace Eto.OxyPlot.Wpf
     {
         public override Color BackgroundColor
         {
-            get { return Control.PlotAreaBackground.ToEtoColor(); }
-            set { Control.PlotAreaBackground = value.ToWpfBrush(Control.PlotAreaBackground); }
+            get 
+            {
+                return Color.FromArgb(
+                    Control.Model.PlotAreaBackground.R,
+                    Control.Model.PlotAreaBackground.G,
+                    Control.Model.PlotAreaBackground.B,
+                    Control.Model.PlotAreaBackground.A);
+            }
+            set 
+            {
+                Control.Model.PlotAreaBackground = OxyColor.FromArgb(
+                    (byte)value.A,
+                    (byte)value.R,
+                    (byte)value.G,
+                    (byte)value.B);
+            }
         }
 
         public PlotModel Model
@@ -30,6 +44,11 @@ namespace Eto.OxyPlot.Wpf
             Control = new global::OxyPlot.Wpf.PlotView()
             {
             };
+        }
+
+        public void InvalidatePlot(bool updateData)
+        {
+            Control.InvalidatePlot();
         }
     }
 }

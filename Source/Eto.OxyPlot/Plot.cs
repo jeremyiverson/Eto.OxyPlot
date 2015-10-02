@@ -33,6 +33,11 @@ namespace Eto.OxyPlot
             set { Handler.Model = value; }
         }
 
+        public void InvalidatePlot(bool updateData = true)
+        {
+            Handler.InvalidatePlot(updateData);
+        }
+
         /// <summary>
         /// Handler interface for the <see cref="Plot"/>
         /// </summary>
@@ -43,6 +48,9 @@ namespace Eto.OxyPlot
             /// </summary>
             /// <value>The plot model.</value>
             PlotModel Model { get; set; }
+
+            void InvalidatePlot(bool updateData);
         }
+
     }
 }
